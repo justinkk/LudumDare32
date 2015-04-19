@@ -29,7 +29,7 @@ public class PlayerMovement : MonoBehaviour {
 		//Debug.Log("Up: " + up + " Left: " + left);
 
 		//Calculate velocity
-		Vector3 newVelocity = Vector3.zero;
+		Vector2 newVelocity = Vector2.zero;
 
 		if (up > 0)
 			newVelocity.y = 1;
@@ -43,6 +43,6 @@ public class PlayerMovement : MonoBehaviour {
 		newVelocity = newVelocity.normalized;
 		newVelocity *= speed;
 
-		transform.position = transform.position + newVelocity;
+		GetComponent<Rigidbody2D>().velocity = newVelocity;
 	}
 }
