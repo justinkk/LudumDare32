@@ -4,6 +4,8 @@ using System.Collections;
 public class PlayerMovement : MonoBehaviour {	
 	public float speed;
 
+	private bool pulling; //true iff trying to pull the AOL disk
+
 	// FixedUpdate is called once per physics step
 	void FixedUpdate() {
 		//Figure out which direction to go
@@ -26,8 +28,6 @@ public class PlayerMovement : MonoBehaviour {
 		if (Input.GetKey("right"))
 			left -= 1;
 
-		//Debug.Log("Up: " + up + " Left: " + left);
-
 		//Calculate velocity
 		Vector2 newVelocity = Vector2.zero;
 
@@ -42,7 +42,14 @@ public class PlayerMovement : MonoBehaviour {
 
 		newVelocity = newVelocity.normalized;
 		newVelocity *= speed;
-
 		GetComponent<Rigidbody2D>().velocity = newVelocity;
+
+		//Set if you're pulling
+		pulling = Input.GetKey(KeyCode.Space);
+	}
+
+	//Return true iff you are trying to pull the disk toward you
+	public bool isPulling() {
+		return pulling;
 	}
 }
